@@ -29,7 +29,6 @@ export default function Feed({user, handleLogout}){
       console.log("button was clicked*********");
 
       try {
-        fetch('https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyBfML9ZxzqtaFapDpHDlccl8gRY1Q7NB1s', {
           method: 'POST',
           headers: new Headers({'Content-Type': 'application/json'}),
           body: JSON.stringify(requestBody)
