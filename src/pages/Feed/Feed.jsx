@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import PageHeader from '../../components/Header/Header';
 import StoryFeed from '../../components/StoryFeed/StoryFeed';
-import { Grid } from 'semantic-ui-react';
+import { Button, Input, Grid } from 'semantic-ui-react';
 import googleService from '../../utils/googleService';
 import { fs } from 'fs';
 import util from 'util';
 import base64 from 'react-native-base64';
 import fsReact from 'fs-react';
+
+const style = <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css'/>
 
 export default function Feed({user, handleLogout}){
     
@@ -89,3 +91,4 @@ export default function Feed({user, handleLogout}){
 
       )
   }
+
