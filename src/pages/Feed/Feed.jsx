@@ -72,7 +72,7 @@ export default function Feed({user, handleLogout}){
         <h1>This is the homepage!</h1>
         <button onClick={processText}>SPEAK</button>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></source>
+          <source src="https://read4me.s3-us-west-1.amazonaws.com/synthesized-audio.mp3" type="audio/mpeg"></source>
           Your browser does not support the audio element.
         </audio>
      </div>
