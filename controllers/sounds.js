@@ -10,7 +10,40 @@ module.exports = {
   
 // This code works, when making a pure http request to Google API, not using Google clent
 async function processText(req, res) {
-  const myText = 'Hello guys and girls! How do you like my voice! Whats UP!';
+  const myText = 'How do you like my voice! Whats UP!';
+  try {
+    const googleApiResult = await callTextToSpeechGoogleApi(myText);
+    console.log("googleApiResult :", googleApiResult);
+    const fileDecodeAndSaveResult = await base64decodeAndSaveMp3(googleApiResult);
+    console.log("fileDecodeAndSaveResult :", fileDecodeAndSaveResult);
+    //Send file to S3
+    //
+    res.send({ googleApiResult, fileDecodeAndSaveResult });
+  } catch (error) {
+    console.log(error, ' this is the error');
+    res.send(error); 
+  }
+}
+
+async function base64decodeAndSaveMp3(audioContent) {
+ 
+  try {
+    // Audio decoding - START
+    const buff = Buffer.from(audioContent, 'base64');
+    // save decoded file 
+    fs.writeFileSync('test2.mp3', buff);
+    return { success: true }
+  } catch (error) {
+    return { success: false }
+  }
+}
+
+
+
+async function callTextToSpeechGoogleApi(myText) {
+
+  let respData = "";
+
   let requestBody = {
     input: {
       text: myText
@@ -20,44 +53,40 @@ async function processText(req, res) {
       name: "en-GB-Standard-D",
       ssmlGender: "MALE"
     },
-    audioConfig: {
+      audioConfig: {
       audioEncoding: "MP3"
     }
-  }
+  };
 
-  request({
-    url: 'https://texttospeech.googleapis.com/v1/text:synthesize?key=' + process.env.GOOGLE_API_KEY,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: requestBody,
-    json: true
-  }, async function (error, response, body) {
-    console.error('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
+  const finalResult = await new Promise(function(resolve, reject) {
+    request({
+      url: 'https://texttospeech.googleapis.com/v1/text:synthesize?key=' + process.env.GOOGLE_API_KEY,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: requestBody,
+      json: true
+    }, function (error, response, body) {
+      if (!error && body && body.audioContent) {
+        resolve({ success: true, audioContent: body.audioContent });
+      } else {
+        reject(error);
+      }
+    })
     
-    if (!error && body && body.audioContent) {
-      console.log('CHECK 1A *****');
+    // .on('response', function(response) {
+      
+    // }).on('data', function(chunk) {
+    //   respData += chunk;
+    // }).on('error', function(error) {
+    // }).on('end', function() {
+    //   let stringResponse = respData.toString('utf8');
+    //   let jsonResponse = JSON.parse(stringResponse);
+    //   resolve({ success: true, audioContent: jsonResponse.audioContent });
+    // });
+  });
 
-      // Audio processing - START
-      const buff = Buffer.from(body.audioContent, 'base64');
-      fs.writeFileSync('test2.mp3', buff);
-      // Audio processing - END
+  return finalResult;
 
-
-      res.json({audioContent: body.audioContent});
-    } else {
-      console.log('CHECK 1B *****');
-      res.json({message: 'Something went wrong...'});
-    }
-  });  
-}
-
-async function decodeAudioContent(audioContent) {
-  const outputFile = '/output.mp3'
-  const writeFile = util.promisify(fs.writeFile);
-  await writeFile(outputFile, audioContent, 'binary');
-  console.log(`Audio content written to file: ${outputFile}`);
 }
