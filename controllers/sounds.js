@@ -17,9 +17,10 @@ module.exports = {
 // This code works, when making a pure http request to Google API, not using Google clent
 async function processText(req, res) {
 
-  const myText = 'Hi Volodya!';
-
+  const requestBody = req.body;
+  
   try {
+    const myText = requestBody.text;
     // STEP 1 making call to text to speech Google API
     const googleApiResult = await callTextToSpeechGoogleApi(myText);
     console.log("googleApiResult :", googleApiResult);

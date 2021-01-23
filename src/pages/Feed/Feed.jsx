@@ -7,6 +7,8 @@ import PageHeader from '../../components/Header/Header';
 import StoryFeed from '../../components/StoryFeed/StoryFeed';
 import { Button, Input, Grid } from 'semantic-ui-react';
 import soundService from '../../utils/soundService';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import { fs } from 'fs';
 import util from 'util';
 import base64 from 'react-native-base64';
@@ -16,7 +18,7 @@ import fsReact from 'fs-react';
 // const style = <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css'/>
 
 export default function Feed({user, handleLogout}) {
-  const [location, setLocation] = useState(); //location is the url path to S3 bucket
+  const [location, setLocation] = useState(); //location is the url path to S3 bucket with mp3 file
     
   async function processText(e) {
     e.preventDefault();
@@ -34,6 +36,7 @@ export default function Feed({user, handleLogout}) {
     console.log("This is reponseFromProcessTextApi: ", reponseFromProcessTextApi);
   }
   
+ 
   return (
     <Grid centered >
     <Grid.Row>
@@ -46,15 +49,22 @@ export default function Feed({user, handleLogout}) {
             <Grid.Column style={{maxWidth: 450}}>
               {/* <StoryFeed story={story} isProfile={false} user={user} /> */}
               <Button onClick={processText}>SPEAK</Button>
-              <audio controls>
-              <source src="{location}" type="audio/mpeg"></source>
+              <audio controls key={location}>
+                <source src={location} type="audio/mpeg"></source>
               Your browser does not support the audio element.
               </audio>
-            </Grid.Column>
+
+          {/* <AudioPlayer
+          autoPlay
+          src={location}
+          onPlay={e => console.log("onPlay")}
+          // other props here
+        /> */}
+        </Grid.Column>
         </Grid.Row> 
         <Grid.Row>
           <Grid.Column>
-            <InputForm readInputText={readInputText}/>
+           <InputForm readInputText={readInputText}/>
           </Grid.Column>
         </Grid.Row>
   </Grid>
