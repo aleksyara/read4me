@@ -6,6 +6,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ProfilePage from '../ProfilePage/ProfilePage'
 import userService from '../../utils/userService'
 import Feed from '../Feed/Feed';
+import TestPage from '../TestPage/TestPage';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
+          <Route exact path="/test">
+            <TestPage handleSignUpOrLogin={handleSignUpOrLogin} />
+          </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />
           </Route>
