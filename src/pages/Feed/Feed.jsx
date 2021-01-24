@@ -8,6 +8,7 @@ import StoryFeed from '../../components/StoryFeed/StoryFeed';
 import { Button, Input, Grid } from 'semantic-ui-react';
 import soundService from '../../utils/soundService';
 import AudioPlayer from 'react-h5-audio-player';
+import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
 import { fs } from 'fs';
 import util from 'util';
@@ -20,13 +21,7 @@ import fsReact from 'fs-react';
 export default function Feed({user, handleLogout}) {
   const [location, setLocation] = useState(); //location is the url path to S3 bucket with mp3 file
     
-  async function processText(e) {
-    e.preventDefault();
-    console.log("button was clicked*********");
-    
-  }
-
-  async function readInputText(inputText) {
+    async function readInputText(inputText) {
     console.log("This is a text we want to listen", inputText);
     //TODO: Make a request to our backend api
     const reponseFromProcessTextApi = await soundService.callProcessTextApi(inputText);
@@ -47,19 +42,12 @@ export default function Feed({user, handleLogout}) {
     </Grid.Row>
         <Grid.Row>
             <Grid.Column style={{maxWidth: 450}}>
-              {/* <StoryFeed story={story} isProfile={false} user={user} /> */}
-              <Button onClick={processText}>SPEAK</Button>
-              <audio controls key={location}>
-                <source src={location} type="audio/mpeg"></source>
-              Your browser does not support the audio element.
-              </audio>
 
-          {/* <AudioPlayer
-          autoPlay
-          src={location}
-          onPlay={e => console.log("onPlay")}
-          // other props here
-        /> */}
+          <AudioPlayer
+            autoPlay
+            src={location}
+            onPlay={e => console.log("onPlay")}/>
+
         </Grid.Column>
         </Grid.Row> 
         <Grid.Row>
