@@ -18,13 +18,13 @@ import userService from '../../utils/userService';
 export default function Feed({user, handleLogout}) {
  
   const [location, setLocation] = useState(); //location is the url path to S3 bucket with mp3 file
-  const [playlist, setPlaylist] = useState([]);
+  const [playlist, setPlaylist] = useState();
   
-  async function initPlaylist(userId) {
-    userService.getUserPlaylist(userId).then(data => {
-      return data;
-    });
-  }
+  useEffect(() => {
+    userService.getUserPlaylist(user._id).then(data => {
+      setPlaylist(data);
+    });   
+  }, []);
 
   async function addToPlaylist(story){
     try {
@@ -51,9 +51,11 @@ async function testGetPlaylist(){
     </Grid.Row>
         <Grid.Row>
             <Grid.Column style={{maxWidth: 450}}>
+
               <AudioPlayer
                 autoPlay
-                src={location}
+                src
+                ={location}
                 onPlay={e => console.log("onPlay")}/>
             </Grid.Column>
         </Grid.Row> 
@@ -66,24 +68,28 @@ async function testGetPlaylist(){
         <Grid.Row>
           <Grid.Column>
            
-            
-          {playlist.map((story, index) => {
-               
-                return ( 
-                  
-                  <Card key={index}>
-                    <Card.Content header={story.title} />
-                    <Card.Content description={story.description} />
-                    <Card.Content extra>
-                      <AudioPlayer
+            <button onClick={testGetPlaylist}>Test playlist</button>
+          {
+          playlist && playlist.length ?
+            playlist.map((story, index) => {
+                
+                  return ( 
+                    
+                    <Card key={index}>
+                      <Card.Content header={story.title} />
+                      <Card.Content description={story.description} />
+                      <Card.Content extra>
+                        <AudioPlayer
 
-                        // autoPlay
-                        src={story.location}
-                        onPlay={e => console.log("onPlay")}/>
-                    </Card.Content>
-                  </Card>
-                )
-              })          
+                          // autoPlay
+                          src={story.location}
+                          onPlay={e => console.log("onPlay")}/>
+                      </Card.Content>
+                    </Card>
+                  )
+                })
+                :
+                <p>No stories</p>        
           }
           </Grid.Column>
         </Grid.Row>
