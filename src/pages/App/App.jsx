@@ -28,9 +28,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
-          <Route exact path="/test">
-            <TestPage handleSignUpOrLogin={handleSignUpOrLogin} />
-          </Route>
+        <Route exact path="/test">
+          <TestPage handleSignUpOrLogin={handleSignUpOrLogin} />
+        </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />
           </Route>
