@@ -26,12 +26,6 @@ export default function Feed({user, handleLogout}) {
     });   
   }, []);
 
-  async function initPlaylist(userId) {
-    userService.getUserPlaylist(userId).then(data => {
-      return data;
-    });
-  }
-
   async function addToPlaylist(story){
     try {
     // Add story to the PlaylistSchema
