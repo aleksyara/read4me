@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Icon } from 'semantic-ui-react';
+import { Icon, Form, Button } from 'semantic-ui-react';
 import soundService from '../../utils/soundService';
 
 export default function InputForm(props) {
@@ -35,25 +35,23 @@ export default function InputForm(props) {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="story name"
+        placeholder="Story name"
         value={newStory.title}
         name="title"
         onChange={handleInput}
       />
       <textarea
         type="text"
-        placeholder="paste your text here"
+        placeholder="Paste your text here"
         value={newStory.description}
         name="description"
         onChange={handleInput}
       />
-      <button>Add to Story <Icon rotated='clockwise' name='add' /></button>
-      <div>
-    
-    </div>
-    </form>
+      <Form.Button content='Add to Story' >Add to Story <span><Icon rotated='clockwise' name='add' /></span> 
+      </Form.Button>
+    </Form>
   );
 }
