@@ -5,7 +5,9 @@ const SECRET = process.env.SECRET;
 module.exports = {
   signup,
   login,
-  profile
+  profile,
+  addStoryToPlaylist,
+  getPlaylist,
 };
 
 async function signup(req, res) {
@@ -42,13 +44,37 @@ async function login(req, res) {
 
 async function profile(req, res){
   try {
-    const user = await User.findOne({username: req.params.username})
+    const user = await User.findOne({username: req.params.username});
+    console.log("*******user", user);
     // const posts = await Post.find({user: user._id});
     res.status(200).json({posts: posts, user: user})
   } catch(err){
     return res.status(401).json(err)
   }
 }
+
+async function addStoryToPlaylist(req, res){
+ try {
+    const user = await User.findOne({_id: req.params.id});
+    console.log("********88", req.body);
+    user.playlist.push(req.body);
+    console.log("user------>", user);
+    const playlistSaveResult = await user.save();
+    console.log("playlistSaveResult:", playlistSaveResult);
+    res.send(playlistSaveResult);
+  } catch(err){
+    res.status(500).send(err);
+  }
+}
+
+async function getPlaylist(req, res){
+  try {
+     const user = await User.findOne({_id: req.params.id});
+     res.send(user.playlist);
+   } catch(err){
+     res.status(500).send(err);
+   }
+ }
 
 /*----- Helper Functions -----*/
 

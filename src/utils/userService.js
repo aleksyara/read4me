@@ -41,9 +41,45 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
+
+function addToPlaylist(story){
+  const user = getUser();
+  console.log("888888888888888");
+  console.log("this is the user", user);
+  return fetch(BASE_URL + `${user._id}/story`, {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(story)
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    };
+    throw new Error('Something is not OK');
+  });
+}
+
+function getUserPlaylist(userid) {
+  // create a GET request to load playlist that belongs to a user
+  const user = getUser();
+  
+  return fetch(BASE_URL + `${userid}/story`, {
+    method: 'GET',
+    headers: new Headers({'Content-Type': 'application/json'}),
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    };
+    throw new Error('Something is not OK');
+  });
+}
+
 export default {
   signup, 
   getUser,
   logout,
-  login
+  login,
+  addToPlaylist,
+  getUserPlaylist,
 };
