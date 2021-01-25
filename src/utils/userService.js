@@ -44,8 +44,6 @@ function login(creds) {
 
 function addToPlaylist(story){
   const user = getUser();
-  console.log("888888888888888");
-  console.log("this is the user", user);
   return fetch(BASE_URL + `${user._id}/story`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -59,20 +57,24 @@ function addToPlaylist(story){
   });
 }
 
-function getUserPlaylist(userid) {
+async function getUserPlaylist(userid) {
   // create a GET request to load playlist that belongs to a user
   const user = getUser();
-  
-  return fetch(BASE_URL + `${userid}/story`, {
-    method: 'GET',
-    headers: new Headers({'Content-Type': 'application/json'}),
+   
+  const finalResult = await new Promise(function(resolve, reject) {
+    fetch(BASE_URL + `${userid}/story`, {
+      method: 'GET',
+      headers: new Headers({'Content-Type': 'application/json'}),
+    })
+    .then(res => res.json())
+    .then(result => {
+      resolve(result);
+    }, error => {
+      reject(error);
+    });
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    };
-    throw new Error('Something is not OK');
-  });
+  return finalResult;
+
 }
 
 export default {
