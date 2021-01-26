@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import InputForm from "../../components/InputForm/InputForm";
 import PageHeader from '../../components/Header/Header';
 import StoryFeed from '../../components/StoryFeed/StoryFeed';
-import { Button, Image, Grid, Card, } from 'semantic-ui-react';
+import { Button, Image, Grid, Card, Icon } from 'semantic-ui-react';
 import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
@@ -30,20 +30,29 @@ export default function Feed({user, handleLogout}) {
 
   async function addToPlaylist(story){
     try {
-    // Add story to the PlaylistSchema
-    const addToPLaylistResult = await userService.addToPlaylist(story);
-    setPlaylist([...playlist, story]);
+      // Add story to the PlaylistSchema
+      const addToPLaylistResult = await userService.addToPlaylist(story);
+      setPlaylist([...playlist, story]);
     } catch (err) {
       console.log(err);
     }
+  }
 
+  async function removeFromPlaylist(e) {
+    // TODO finish delete functionality
+    try {
+      console.log('&&**************');
+      console.log('e', e);
+    } catch (err) {
+      console.log(err);
+    }
   }
   
   return (
     <Grid centered >
     <Grid.Row>
       <Grid.Column>
-        <PageHeader user={user}/>
+        <PageHeader user={user} handleLogout={handleLogout} />
           <Image src={ logo } size='medium' centered />
       </Grid.Column>
     </Grid.Row>
@@ -66,7 +75,10 @@ export default function Feed({user, handleLogout}) {
                   return ( 
                     
                     <Card fluid color='orange' key={index} centered >
-                      <Card.Content header={story.title} />
+                      <Card.Header >
+                        {story.title}
+                        <Icon name="trash alternate"  onClick={() => removeFromPlaylist(story)}/>
+                      </Card.Header>
                       <Card.Content description={story.description} />
                       <Card.Content extra>
                         <AudioPlayer

@@ -50,7 +50,7 @@ export default function InputForm(props) {
         name="description"
         onChange={handleInput}
       />
-      <Form.Button content='Add to Story' >Add to Story <span><Icon rotated='clockwise' name='add' /></span> 
+      <Form.Button >Add to Story <span><Icon rotated='clockwise' name='add' /></span> 
       </Form.Button>
     </Form>
   );
