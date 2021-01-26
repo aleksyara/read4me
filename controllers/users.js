@@ -56,11 +56,11 @@ async function profile(req, res){
 async function addStoryToPlaylist(req, res){
  try {
     const user = await User.findOne({_id: req.params.id});
-    console.log("********88", req.body);
+    // console.log("********88", req.body);
     user.playlist.push(req.body);
-    console.log("user------>", user);
+    // console.log("user------>", user);
     const playlistSaveResult = await user.save();
-    console.log("playlistSaveResult:", playlistSaveResult);
+    // console.log("playlistSaveResult:", playlistSaveResult);
     res.send(playlistSaveResult);
   } catch(err){
     res.status(500).send(err);

@@ -3,7 +3,7 @@ import './LoginPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useForm } from '../../hooks/useForm';
 import userService from '../../utils/userService';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginPage(props){
     const [invalidForm, setValidForm] = useState(false);

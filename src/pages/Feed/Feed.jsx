@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { fab } from '@fortawesome/free-brands-svg-icons'
 import InputForm from "../../components/InputForm/InputForm";
 import PageHeader from '../../components/Header/Header';
-import StoryFeed from '../../components/StoryFeed/StoryFeed';
-import { Button, Image, Grid, Card, Icon } from 'semantic-ui-react';
+import { Image, Grid, Card, Icon } from 'semantic-ui-react';
 import AudioPlayer from 'react-h5-audio-player';
-import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
-import { fs } from 'fs';
-import util from 'util';
-import base64 from 'react-native-base64';
-import fsReact from 'fs-react';
 import userService from '../../utils/userService';
-
 import logo from '../../utils/img/read4me-logo.png';
 
 export default function Feed({user, handleLogout}) {
