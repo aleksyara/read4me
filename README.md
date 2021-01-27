@@ -19,7 +19,9 @@ To improve a time management and give a great tool to make life better.
 
 1. ## Screenshots
 
+!["PrintScreen"](src/utils/img/prntscrn3.png)
 !["PrintScreen"](src/utils/img/prntscrn.png)
+!["PrintScreen"](src/utils/img/prntscrn2.png)
 
 
 2. ## Technologies Used
