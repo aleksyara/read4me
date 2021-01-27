@@ -12,9 +12,10 @@ To improve a time management and give a great tool to make life better.
 **Problems**
 
 
-* You have a lot of documents to read but you physically don’t have time to read it.
-* You want someone to read a book for you when you will be driving.
-* You want to improve your English skills and learn new accents and dialects.  
+* You have a lot of documents to read. 
+* User doesn’t have time to read long-read social media posts.
+* You want to improve your English skills and learn languages from different  dialects.
+ 
 
 
 1. ## Screenshots
@@ -40,7 +41,7 @@ Please see the project here [Read4Me](https://read4me.herokuapp.com)
 
 4. ## Ice-BOX: 
 
-* User should be able to choose language or different voice for each story;
+* User should be able to choose languages or different voice for each story;
 * User should be able to see a playing text as a WATERFALL while listening the story
 * User should be able to see diagrams or photo from the document that currently playing 
 * User should be able to arrange stories in the queue
