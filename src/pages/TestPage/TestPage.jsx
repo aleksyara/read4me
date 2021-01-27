@@ -4,16 +4,21 @@ import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import lodash from 'lodash';
 import Icon  from '@ant-design/icons';
+import { Button, Input, Dropdown, Menu, Switch } from 'antd'
+
+
 import data from './data';
 import Header from './Header';
 import { Grid, Slug, Fade } from 'mauerwerk';
+
+// const { TextArea } = Input;
 
 const Cell = ({ toggle, name, height, description, css, maximized }) => (
   <div
     className="cell"
     style={{ backgroundImage: css, cursor: !maximized ? 'pointer' : 'auto' }}
     onClick={!maximized ? toggle : undefined}>
-         
+    {/* <TextArea rows={4} /> */}
     <Fade show={maximized} delay={maximized ? 400 : 0}>
       <div className="details">
         <Slug delay={600}>

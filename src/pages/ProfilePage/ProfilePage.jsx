@@ -51,6 +51,11 @@ export default function ProfilePage({ user, handleLogout }) {
                             <PageHeader user={user}/>
                         </Grid.Column>
                     </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <h2>This is a Profile Page</h2>
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
             
         </>
