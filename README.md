@@ -13,8 +13,8 @@ To improve a time management and give a great tool to make life better.
 
 
 * You have a lot of documents to read. 
-* User doesn’t have time to read long-read social media posts.
-* You want to improve your English skills and learn languages from different  dialects.
+* You don't have time for interesting long-read material but eager to know about it.
+* You want to learn a new language 
  
 
 
