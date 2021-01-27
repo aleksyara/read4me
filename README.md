@@ -1,7 +1,7 @@
 # Read4Me
 ==================
 
-As a part of SEI-10-19 Project 4, I created **eSitter**.
+As a part of SEI-10-19 Project 4, I created **Read4Me**.
 
 This is a simple full-stack web app synthesizing any text in 40+ languages utilizing 220+ voices. 
 
