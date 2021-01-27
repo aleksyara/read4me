@@ -32,6 +32,7 @@ To improve a time management and give a great tool to make life better.
 * Atlas
 * MongoDB
 * Google API
+* AWS S3
 
 3. ## Link to deployed app:
 Please see the project here [Read4Me](https://read4me.herokuapp.com)
